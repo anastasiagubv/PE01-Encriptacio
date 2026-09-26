@@ -5,6 +5,9 @@ public class ProgramaPrincipal {
 
     String messatge = "";
     String key = "";
+    String keyInput = "";
+    String encryptedMessatge = "";
+    String desencryptedMessatge = "";
 
     public static void main(String[] args) {
         ProgramaPrincipal s = new ProgramaPrincipal();
@@ -23,9 +26,16 @@ public class ProgramaPrincipal {
             System.out.print(prompt);
             try {
                 input = sc.nextLine();
-                valid = true;
+
+                if (input.trim().isEmpty()) {
+                    System.out.println("Error: no pot estar buit. Torna-ho a provar.");
+                    valid = false;
+                } else {
+                    valid = true;
+                }
+
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println("Error: no s'ha pogut llegir l'entrada.");
                 valid = false;
             }
         } while (!valid);
@@ -34,14 +44,34 @@ public class ProgramaPrincipal {
     }
 
     public void menu() {
-        //Obtenir clau
-        key = readString("Introdueix clau: ");
+        // Obtenir clau
+        key = readString("Introdueix la clau en format de text: ");
 
-        //Obtenir missatge
-        messatge = readString("Introdueix missatge: ");
+        // Obtenir missatge
+        messatge = readString("Introdueix el teu missatge: ");
 
-        //Encriptar missatge cirdant el mètode d'encriptar
-        //Mostrar resultat
-        //Comprovar que retorna el missatge encriptat amb el mètode de desencriptar
+        // Encriptar
+        encryptedMessatge = ClasseCriptografica.encripta(messatge, key);
+
+        // Desencriptar
+        keyInput = readString("Introdueix la clau per desencriptar el missatge: ");
+        desencryptedMessatge = ClasseCriptografica.desencripta(encryptedMessatge, keyInput);
+
+        showResults();
+    }
+
+    public void showResults() {
+        System.out.println("\nEncriptació:");
+        System.out.println("Missatge original: " + messatge);
+        System.out.println("Missatge encriptat: " + encryptedMessatge);
+        System.out.println("Missatge desencriptat: " + desencryptedMessatge);
+        System.out.println("Clau d'encriptació: " + key);
+        System.out.println("Clau de desencriptació: " + keyInput);
+
+        if (messatge.equals(desencryptedMessatge)) {
+            System.out.println("Correcte: sí");
+        } else {
+            System.out.println("Correcte: no");
+        }
     }
 }

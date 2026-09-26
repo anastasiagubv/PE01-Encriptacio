@@ -26,8 +26,19 @@ public class ClasseCriptografica {
         return encryptedMessatge;
     }
 
-    public static String desencripta(String key, String encryptedMessatge) {
+    public static String desencripta(String encryptedMessatge, String key) {
+        String[] parts = encryptedMessatge.split(",");
+        ArrayList<String> desencrypted = new ArrayList<>(); 
 
-        return encryptedMessatge;
+        for (int i = 0; i < parts.length; i++) {
+            int em = Integer.parseInt(parts[i]);
+
+            char k = key.charAt(i % key.length());
+
+            int reverseXor = em ^ k;
+            desencrypted.add(String.valueOf((char) reverseXor));
+        }
+        String messatge = String.join("", desencrypted);
+        return messatge;
     }
 } 
