@@ -6,22 +6,16 @@ public class ClasseCriptografica {
         ArrayList<String> encrypted = new ArrayList<>(); 
 
         for (int i = 0; i < messatge.length(); i++) {
-            // m = posició de cada lletra del missatge
+            // m = posició missatge
             char m = messatge.charAt(i);
 
-            // k = posició de cada lletra de la clau i 
-            // la llargada de la clau per poder aplicar el vigenere
+            // k = posició clau
             char k = key.charAt(i % key.length());
 
-            // xor = entre els dos caràcters
-            // Agafa el unicode de cada lletra
-            // El resultat és el caràcter xifrat.
             int xor = m ^ k;
             encrypted.add(String.valueOf(xor));
-
         }
-        // Concatenar 
-        // S'ajunten tots els números separats per comes
+
         String encryptedMessatge = String.join(",", encrypted);
         return encryptedMessatge;
     }
