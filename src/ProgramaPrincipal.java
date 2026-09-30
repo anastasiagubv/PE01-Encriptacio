@@ -1,3 +1,4 @@
+package src;
 import java.util.Scanner;
 
 public class ProgramaPrincipal {
@@ -72,6 +73,7 @@ public class ProgramaPrincipal {
             System.out.println("Correcte: sí");
         } else {
             System.out.println("Correcte: no");
+            System.out.println("Raó: claus diferents!");
         }
     }
 }
